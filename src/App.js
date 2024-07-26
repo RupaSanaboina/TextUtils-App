@@ -2,7 +2,8 @@ import React,{ useState } from "react";
 import About from "./components/About";
 import Navbar from "./components/Navbar";
 import Alert from "./components/Alert"
-import TextForm from "./components/TextForm"
+import TextForm from "./components/TextForm";
+import { BrowserRouter,Route,Routes } from "react-router-dom";
 
 function App() {
   const [mode,setDarkMode] = useState('light');
@@ -36,15 +37,20 @@ function App() {
   return (
     
 <>
+<BrowserRouter>
 <Navbar title="TextUtils" aboutText="About Us" mode={mode} toggleMode={toggleMode} modeText={modeText}/>
 <Alert alert={alert}/>
 <div className="container my-3">
-<TextForm heading="Enter the text to Analyze" showAlert={showAlert} mode={mode}/>
-<About/>
+  <Routes>
+    <Route exact path="/about" element={<About/>}></Route>
+<Route exact path="/"element={<TextForm heading="Enter the text to Analyze" showAlert={showAlert} mode={mode}/>}></Route>
+
+
+</Routes>
 </div>
 
 
-
+</BrowserRouter>
     </>
   );
 }
